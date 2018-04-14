@@ -7,6 +7,7 @@ export default Service.extend({
   prepend: '/',
 
   resolve(name) {
+    console.log(get(this, map))
     const map = get(this, 'map') || {};
     const prepend = get(this, 'prepend');
     const enabled = get(this, 'enabled');

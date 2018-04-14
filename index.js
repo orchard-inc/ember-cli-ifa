@@ -76,14 +76,16 @@ module.exports = {
       this.ui.writeLine('When running fastboot, ember-cli-ifa is forced into inline mode.');
     }
     let inline = ifaConfig.inline || this._isFastBoot;
-
+    console.log('inline', inline)
+    console.log(assetFileNamePath)
+    console.log(fs.existsSync(assetFileNamePath))
     if (inline && fs.existsSync(assetFileNamePath)) {
       assetMapPlaceholder = fs.readFileSync(assetFileNamePath, { encoding: 'utf-8' });
       assetMapPlaceholder = JSON.stringify(JSON.parse(assetMapPlaceholder));
     } else if (assetFileName) {
       assetMapPlaceholder = `"${fingerprintPrepend}assets/${assetFileName}"`;
     }
-
+    console.log(assetMapPlaceholder)
     // When minifiying, '__asset_map_placeholder__' may be re-written into "__asset_map_placeholder__"
     // So we need to replace both variants
     fs.writeFileSync(vendorJsFilePath, vendorJsFile.replace(/('|")(__asset_map_placeholder__)('|")/, assetMapPlaceholder));

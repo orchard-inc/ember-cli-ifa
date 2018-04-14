@@ -6,6 +6,7 @@ import getAssetMapData from 'ember-cli-ifa/utils/get-asset-map-data';
 
 export function initialize(app) {
   let assetMapFile = getAssetMapData();
+  console.log('assetMapFile', assetMapFile)
 
   // This is split out like this, in order to prevent this from being accidentally replaced
   let replacementPath = ['__', 'asset_map_placeholder', '__'].join('');
@@ -16,6 +17,7 @@ export function initialize(app) {
   }
 
   if (getTypeOf(assetMapFile) === 'object' && assetMapFile.assets) {
+    console.log('reopening', assetMapFile.assets)
     AssetMap.reopen({
       map: assetMapFile.assets,
       prepend: assetMapFile.prepend,
